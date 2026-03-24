@@ -1,4 +1,4 @@
-# 📚 Buchtausch Datenbank – Relational Database System
+#  Buchtausch Datenbank – Relational Database System
 
 ## 📖 Projektbeschreibung
 
@@ -14,7 +14,7 @@ Diese Modellierung reduziert Redundanzen und ermöglicht eine flexible Erweiteru
 
 ---
 
-## 🏗️ Systemarchitektur
+##  Systemarchitektur
 
 Die Datenbank basiert auf einem Entity-Relationship-Modell und wurde vollständig in ein relationales Schema überführt.
 
@@ -34,15 +34,15 @@ Die Datenbank basiert auf einem Entity-Relationship-Modell und wurde vollständi
 
 Das System unterstützt folgende Kernfunktionen:
 
-* 🔍 **Suche nach verfügbaren Büchern**
-* 📦 **Verwaltung von Buchangeboten**
-* 🔄 **Ausleihe von Büchern (inkl. Status-Tracking)**
-* ⭐ **Bewertung von ausgeliehenen Büchern**
-* 📅 **Zeitfenster-basierte Abholung (Time Slots)**
+*  **Suche nach verfügbaren Büchern**
+*  **Verwaltung von Buchangeboten**
+*  **Ausleihe von Büchern (inkl. Status-Tracking)**
+*  **Bewertung von ausgeliehenen Büchern**
+*  **Zeitfenster-basierte Abholung (Time Slots)**
 
 ---
 
-## 🧠 Datenbankdesign & Konzepte
+##  Datenbankdesign & Konzepte
 
 * Verwendung von **UUIDs** als Primärschlüssel
 * Einsatz von **ENUM-Typen** für Status und Rollen
@@ -52,7 +52,7 @@ Das System unterstützt folgende Kernfunktionen:
 
 ---
 
-## 🚀 Performance & Optimierung
+##  Performance & Optimierung
 
 Zur Verbesserung der Performance wurden folgende Maßnahmen umgesetzt:
 
@@ -63,7 +63,7 @@ Zur Verbesserung der Performance wurden folgende Maßnahmen umgesetzt:
 
 ---
 
-## 🔐 Datenintegrität
+##  Datenintegrität
 
 Zur Sicherstellung der Datenqualität wurden folgende Mechanismen implementiert:
 
