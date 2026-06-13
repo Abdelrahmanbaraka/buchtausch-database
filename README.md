@@ -111,10 +111,7 @@ Das System wurde anhand mehrerer Testfälle überprüft:
 * Datenbankgröße: **im MB-Bereich**
 
 ---
-
 ## 👨‍💻 Autor
-
 **Abdelrahman Baraka**
-
 ---
 
