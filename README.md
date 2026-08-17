@@ -1,117 +1,50 @@
-#  Buchtausch Datenbank – Relational Database System
+# Buchtausch Database
 
-## 📖 Projektbeschreibung
+A PostgreSQL database design for a book-sharing platform. The project models users, physical book copies, availability windows, loans and reviews while enforcing data integrity through constraints and triggers.
 
-Dieses Projekt implementiert ein vollständiges relationales Datenbankmanagementsystem für eine Buchtauschplattform.
-Ziel ist es, reale Geschäftsprozesse wie das Anbieten, Ausleihen und Bewerten von Büchern effizient und konsistent abzubilden.
+## Design focus
 
-Ein zentrales Designmerkmal ist die Trennung zwischen:
+A central modeling decision separates:
 
-* **BOOK (logisches Buchwerk)**
-* **USER_BOOK (physisches Exemplar eines Buches)**
+- `book`: the logical work and its shared metadata
+- `user_book`: a physical copy owned by a specific user
 
-Diese Modellierung reduziert Redundanzen und ermöglicht eine flexible Erweiterung des Systems.
+This reduces duplicated book metadata and allows several users to offer copies of the same work.
 
----
+## Main entities
 
-##  Systemarchitektur
+`user`, `address`, `author`, `genre`, `publisher`, `book`, `user_book`, `pickup_location`, `time_slot`, `availability`, `loan` and `review`.
 
-Die Datenbank basiert auf einem Entity-Relationship-Modell und wurde vollständig in ein relationales Schema überführt.
+## Implemented database concepts
 
-### Wichtige Entitäten:
+- UUID primary keys with PostgreSQL `pgcrypto`
+- Foreign-key, unique and check constraints
+- Enum types for user, account and loan states
+- 1:N, N:M and ternary relationships
+- Automatic timestamp maintenance with triggers
+- Loan business-rule validation
+- Composite and partial indexes
+- Repeatable setup that recreates the schema
+- Sample data and validation queries
 
-* `USER` – Benutzer der Plattform
-* `ADDRESS` – Adressdaten
-* `BOOK` – logische Bücher
-* `USER_BOOK` – physische Exemplare
-* `LOAN` – Ausleihvorgänge
-* `REVIEW` – Bewertungen
-* `AVAILABILITY` – Verfügbarkeiten (ternäre Beziehung)
+## Run the project
 
----
+Requirements: PostgreSQL with permission to enable `pgcrypto`.
 
-## ⚙️ Funktionalitäten
+```bash
+createdb buchtausch
+psql -d buchtausch -f buchtausch_app.sql
+```
 
-Das System unterstützt folgende Kernfunktionen:
+Alternatively, open `buchtausch_app.sql` in pgAdmin and execute the complete script.
 
-*  **Suche nach verfügbaren Büchern**
-*  **Verwaltung von Buchangeboten**
-*  **Ausleihe von Büchern (inkl. Status-Tracking)**
-*  **Bewertung von ausgeliehenen Büchern**
-*  **Zeitfenster-basierte Abholung (Time Slots)**
+## Documentation
 
----
+- [SQL implementation](buchtausch_app.sql)
+- [Project documentation](Abschluss_Document.pdf)
+- [Abstract](Abstract.pdf)
+- [Screenshots](Screenshots/)
 
-##  Datenbankdesign & Konzepte
+## Scope and limitations
 
-* Verwendung von **UUIDs** als Primärschlüssel
-* Einsatz von **ENUM-Typen** für Status und Rollen
-* Umsetzung von **1:N und N:M Beziehungen**
-* Modellierung von **ternären Beziehungen** (`AVAILABILITY`, `LOAN`)
-* Einhaltung der **3. Normalform (3NF)**
-
----
-
-##  Performance & Optimierung
-
-Zur Verbesserung der Performance wurden folgende Maßnahmen umgesetzt:
-
-* 🔹 **Indizes auf Foreign Keys**
-* 🔹 **Zusammengesetzte Indizes (Composite Indexes)**
-* 🔹 **Partielle Indizes für häufige Abfragen**
-* 🔹 Optimierung von SQL-Abfragen durch **JOIN statt Subqueries**
-
----
-
-##  Datenintegrität
-
-Zur Sicherstellung der Datenqualität wurden folgende Mechanismen implementiert:
-
-* ✔️ `CHECK`-Constraints (z. B. Rating 1–5)
-* ✔️ `UNIQUE`-Constraints (z. B. ein Review pro Loan)
-* ✔️ `FOREIGN KEY`-Constraints
-* ✔️ Business-Regeln (z. B. keine Doppelbuchung)
-
----
-
-## 🧪 Tests & Validierung
-
-Das System wurde anhand mehrerer Testfälle überprüft:
-
-* Anzeige verfügbarer Bücher
-* Auswertung von Ausleihvorgängen
-* Aggregationen (z. B. Durchschnittsbewertung)
-* Validierung von Constraints durch Fehlereingaben
-
----
-
-## 🛠️ Technologien
-
-* **PostgreSQL**
-* **pgAdmin**
-* SQL (DDL, DML, Constraints, Indizes)
-
----
-
-## 📥 Installation
-
-1. PostgreSQL installieren  
-2. pgAdmin starten  
-3. Neue Datenbank erstellen  
-4. SQL-Skript ausführen:
-   ```sql
-   buchtausch_app.sql
-
----
-
-## 📊 Metadaten
-
-* Anzahl der Tabellen: **12**
-* Anzahl der Datensätze: **> 120**
-* Datenbankgröße: **im MB-Bereich**
-
----
-## 👨‍💻 Autor
-**Abdelrahman Baraka**
----
-
+This repository contains the relational database layer and its documentation, not a complete web application. The business rules demonstrate a possible design for educational purposes and would require additional application-level validation, authentication and operational monitoring in a production system.
